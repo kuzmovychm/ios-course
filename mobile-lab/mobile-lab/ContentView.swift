@@ -25,7 +25,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            HStack(content: {
+            HStack(spacing: 30, content: {
                 TextField("Input your name", text: $name)
                     .modifier(ClearButton(text: $name))
                 Button(action: {
