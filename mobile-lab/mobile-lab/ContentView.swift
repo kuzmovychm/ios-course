@@ -8,18 +8,37 @@
 
 import SwiftUI
 
+struct CustomButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+            configuration.label
+                .foregroundColor(Color.white)
+                .padding(8)
+                .background(LinearGradient(gradient: Gradient(colors: configuration.isPressed ? [Color.pink, Color.red] : [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
+                .cornerRadius(15.0)
+                .scaleEffect(configuration.isPressed ? 1.02 : 1.0)
+        }
+}
+
 struct ContentView: View {
-    @State var name: String
+    @State var name: String = ""
+    @State var userInput: String = ""
     
     var body: some View {
         VStack {
-            TextField("Input your name", text: $name)
-            Button(action: {
-                print("Button pressed!")
-            }, label: {
-                Text("Say hello")
-            })
-            
+            HStack(content: {
+                TextField("Input your name", text: $name)
+                Button(action: {
+                    self.userInput = name;
+                }, label: {
+                    Text("Say hello")
+                }).buttonStyle(CustomButtonStyle())
+            }).frame(width: 280)
+            if #available(iOS 14.0, *) {
+                Label(title: { Text(("Hello " + userInput).trimmingCharacters(in: .whitespacesAndNewlines)) },
+                      icon: { Text("") })
+            } else {
+                Text("Hello " + userInput)
+            }
         }
     }
 }
@@ -29,5 +48,4 @@ struct ContentView_Previews: PreviewProvider {
 
         ContentView(name: "")
 
-    }
 }
