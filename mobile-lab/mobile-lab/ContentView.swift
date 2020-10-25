@@ -8,15 +8,26 @@
 
 import SwiftUI
 
-struct ContentView: View {    
+struct ContentView: View {
+    @State var name: String
+    
     var body: some View {
-        print("Hello World")
-        return Text("Hello, World!")
+        VStack {
+            TextField("Input your name", text: $name)
+            Button(action: {
+                print("Button pressed!")
+            }, label: {
+                Text("Say hello")
+            })
+            
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        return ContentView()
+
+        ContentView(name: "")
+
     }
 }
