@@ -27,17 +27,22 @@ struct ContentView: View {
         VStack {
             HStack(content: {
                 TextField("Input your name", text: $name)
+                    .modifier(ClearButton(text: $name))
                 Button(action: {
-                    self.userInput = name;
+                    if !name.isEmpty {
+                        self.userInput = name;
+                    }
                 }, label: {
                     Text("Say hello")
                 }).buttonStyle(CustomButtonStyle())
             }).frame(width: 280)
-            if #available(iOS 14.0, *) {
-                Label(title: { Text(("Hello " + userInput).trimmingCharacters(in: .whitespacesAndNewlines)) },
-                      icon: { Text("") })
-            } else {
-                Text("Hello " + userInput)
+            if !userInput.isEmpty {
+                if #available(iOS 14.0, *) {
+                    Label(title: { Text(("Hello " + userInput).trimmingCharacters(in: .whitespacesAndNewlines)) },
+                          icon: { Text("") })
+                } else {
+                    Text("Hello " + userInput)
+                }
             }
         }
     }
