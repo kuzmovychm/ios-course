@@ -25,8 +25,9 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            HStack(spacing: 30, content: {
+            VStack(content: {
                 TextField("Input your name", text: $name)
+                    .multilineTextAlignment(.center)
                     .modifier(ClearButton(text: $name))
                 Button(action: {
                     if !name.isEmpty {
@@ -35,7 +36,7 @@ struct ContentView: View {
                 }, label: {
                     Text("Say hello")
                 }).buttonStyle(CustomButtonStyle())
-            }).frame(width: 280)
+            })
             if !userInput.isEmpty {
                 if #available(iOS 14.0, *) {
                     Label(title: { Text(("Hello " + userInput).trimmingCharacters(in: .whitespacesAndNewlines)) },
@@ -50,7 +51,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-
         ContentView(name: "")
-
+    }
 }
