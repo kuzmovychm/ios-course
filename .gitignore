@@ -131,7 +131,10 @@ iOSInjectionProject/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+# End of https://www.toptal.com/developers/gitignore/api/macos,xcode,swift
+
 # Other files
 Mobile development_ laboratory work.docx
 
 mobile-lab/mobile-lab.xcodeproj/project.xcworkspace/xcuserdata/mac.xcuserdatad/UserInterfaceState.xcuserstate
+mobile-lab/mobile-lab.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
