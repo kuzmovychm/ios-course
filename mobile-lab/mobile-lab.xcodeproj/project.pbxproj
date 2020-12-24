@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040B15242593F70000E5F1BC /* InputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B15232593F70000E5F1BC /* InputForm.swift */; };
+		040B152A2593F95F00E5F1BC /* SampleForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B15292593F95F00E5F1BC /* SampleForm.swift */; };
+		040B153A2594000B00E5F1BC /* ValidationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B15392594000B00E5F1BC /* ValidationUtil.swift */; };
+		040B154825947F2F00E5F1BC /* NSRegularExpressionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040B154725947F2F00E5F1BC /* NSRegularExpressionExtensions.swift */; };
 		045E1D9D2544C496005D0D15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E1D9C2544C496005D0D15 /* AppDelegate.swift */; };
 		045E1D9F2544C496005D0D15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E1D9E2544C496005D0D15 /* SceneDelegate.swift */; };
 		045E1DA22544C496005D0D15 /* mobile_lab.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 045E1DA02544C496005D0D15 /* mobile_lab.xcdatamodeld */; };
@@ -16,7 +20,6 @@
 		045E1DAC2544C499005D0D15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045E1DAA2544C499005D0D15 /* LaunchScreen.storyboard */; };
 		045E1DB72544C499005D0D15 /* mobile_labTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E1DB62544C499005D0D15 /* mobile_labTests.swift */; };
 		045E1DC22544C499005D0D15 /* mobile_labUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E1DC12544C499005D0D15 /* mobile_labUITests.swift */; };
-		04E35A5325460B120042248A /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E35A5225460B120042248A /* ClearButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040B15232593F70000E5F1BC /* InputForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputForm.swift; sourceTree = "<group>"; };
+		040B15292593F95F00E5F1BC /* SampleForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleForm.swift; sourceTree = "<group>"; };
+		040B15392594000B00E5F1BC /* ValidationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationUtil.swift; sourceTree = "<group>"; };
+		040B154725947F2F00E5F1BC /* NSRegularExpressionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionExtensions.swift; sourceTree = "<group>"; };
 		045E1D992544C496005D0D15 /* mobile-lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mobile-lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		045E1D9C2544C496005D0D15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		045E1D9E2544C496005D0D15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +59,6 @@
 		045E1DBD2544C499005D0D15 /* mobile-labUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mobile-labUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		045E1DC12544C499005D0D15 /* mobile_labUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mobile_labUITests.swift; sourceTree = "<group>"; };
 		045E1DC32544C499005D0D15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04E35A5225460B120042248A /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040B15222593F6E500E5F1BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				040B15232593F70000E5F1BC /* InputForm.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		040B15282593F93800E5F1BC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				040B15292593F95F00E5F1BC /* SampleForm.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		040B15382593FFFE00E5F1BC /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				040B15392594000B00E5F1BC /* ValidationUtil.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		040B153E25947E9B00E5F1BC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				040B154725947F2F00E5F1BC /* NSRegularExpressionExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		045E1D902544C496005D0D15 = {
 			isa = PBXGroup;
 			children = (
@@ -103,7 +141,10 @@
 		045E1D9B2544C496005D0D15 /* mobile-lab */ = {
 			isa = PBXGroup;
 			children = (
-				04E35A4625460AD30042248A /* view */,
+				040B153E25947E9B00E5F1BC /* Extensions */,
+				040B15382593FFFE00E5F1BC /* Util */,
+				040B15282593F93800E5F1BC /* ViewModel */,
+				040B15222593F6E500E5F1BC /* Model */,
 				045E1D9C2544C496005D0D15 /* AppDelegate.swift */,
 				045E1D9E2544C496005D0D15 /* SceneDelegate.swift */,
 				045E1DA32544C496005D0D15 /* ContentView.swift */,
@@ -140,14 +181,6 @@
 				045E1DC32544C499005D0D15 /* Info.plist */,
 			);
 			path = "mobile-labUITests";
-			sourceTree = "<group>";
-		};
-		04E35A4625460AD30042248A /* view */ = {
-			isa = PBXGroup;
-			children = (
-				04E35A5225460B120042248A /* ClearButton.swift */,
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,9 +315,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				045E1D9D2544C496005D0D15 /* AppDelegate.swift in Sources */,
+				040B154825947F2F00E5F1BC /* NSRegularExpressionExtensions.swift in Sources */,
 				045E1DA22544C496005D0D15 /* mobile_lab.xcdatamodeld in Sources */,
-				04E35A5325460B120042248A /* ClearButton.swift in Sources */,
 				045E1DA42544C496005D0D15 /* ContentView.swift in Sources */,
+				040B152A2593F95F00E5F1BC /* SampleForm.swift in Sources */,
+				040B153A2594000B00E5F1BC /* ValidationUtil.swift in Sources */,
+				040B15242593F70000E5F1BC /* InputForm.swift in Sources */,
 				045E1D9F2544C496005D0D15 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

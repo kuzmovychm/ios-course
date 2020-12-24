@@ -8,49 +8,35 @@
 
 import SwiftUI
 
-struct CustomButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-            configuration.label
-                .foregroundColor(Color.white)
-                .padding(8)
-                .background(LinearGradient(gradient: Gradient(colors: configuration.isPressed ? [Color.pink, Color.red] : [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
-                .cornerRadius(15.0)
-                .scaleEffect(configuration.isPressed ? 1.02 : 1.0)
-        }
-}
 
 struct ContentView: View {
-    @State var name: String = ""
-    @State var userInput: String = ""
+    @ObservedObject var sampleForm = SampleForm()
     
     var body: some View {
-        VStack {
-            VStack(content: {
-                TextField("Input your name", text: $name)
-                    .multilineTextAlignment(.center)
-                    .modifier(ClearButton(text: $name))
-                Button(action: {
-                    if !name.isEmpty {
-                        self.userInput = name;
+        VStack(alignment: .leading) {
+            ForEach(sampleForm.formFields) { field in
+                TextField(field.placeholder, text: Binding<String>(
+                    get: {field.value},
+                    set: {
+                        sampleForm.setValue(id: field.id, value: $0)
                     }
-                }, label: {
-                    Text("Say hello")
-                }).buttonStyle(CustomButtonStyle())
-            })
-            if !userInput.isEmpty {
-                if #available(iOS 14.0, *) {
-                    Label(title: { Text(("Hello " + userInput).trimmingCharacters(in: .whitespacesAndNewlines)) },
-                          icon: { Text("") })
-                } else {
-                    Text("Hello " + userInput)
-                }
+                ))
+                .keyboardType(field.keyboardType)
             }
+            .padding()
+
+            if let message = sampleForm.errorMessage {
+                Text(message)
+            }
+            
+            Button("Submit", action: sampleForm.validate)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(name: "")
+        ContentView()
     }
 }
+
