@@ -13,7 +13,7 @@ struct ContentView: View {
     @ObservedObject var sampleForm = SampleForm()
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack {
             ForEach(sampleForm.formFields) { field in
                 TextField(field.placeholder, text: Binding<String>(
                     get: {field.value},
