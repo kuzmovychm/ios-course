@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @ObservedObject var sampleForm = SampleForm()
+    @ObservedObject var sampleForm = FromViewModel()
     
     var body: some View {
         VStack {
@@ -25,9 +25,7 @@ struct ContentView: View {
             }
             .padding()
 
-            if let message = sampleForm.errorMessage {
-                Text(message)
-            }
+            Text(sampleForm.errorMessage)
             
             Button("Submit", action: sampleForm.validate)
         }
