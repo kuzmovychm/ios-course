@@ -10,24 +10,12 @@ import SwiftUI
 
 class FromViewModel: ObservableObject {
     @Published private var form: InputForm = FromViewModel.create()
-    @Published var errorMessage: String = ""
+    @Published var errorMessage: String?
     
     // MARK: - Access to the Model
     
     var formFields: [InputField] {
         form.fields
-    }
-    
-    func errorMessageText() -> String {
-        var errors: [String] = []
-        
-        for field in form.fields {
-            if let message = field.errorMessage {
-                errors.append(message)
-            }
-        }
-        
-        return errors.isEmpty ? "" : errors.joined(separator: "\n")
     }
     
     
@@ -39,7 +27,17 @@ class FromViewModel: ObservableObject {
         }
     }
     
-    func validate() {
+    func validateAndSaveUser() {
+        validate()
+        if let errorMessageText = getErrorMessage() {
+            errorMessage = errorMessageText
+        } else {
+            errorMessage = nil
+            saveUser()
+        }
+    }
+    
+    private func validate() -> Void {
         for index in 0..<form.fields.count {
             let field = form.fields[index]
             form.fields[index].errorMessage = field.getErrorMessage(field.value)
@@ -52,8 +50,22 @@ class FromViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    private func getErrorMessage() -> String? {
+        var errors: [String] = []
         
-        errorMessage = errorMessageText()
+        for field in form.fields {
+            if let message = field.errorMessage {
+                errors.append(message)
+            }
+        }
+        
+        return errors.isEmpty ? nil : errors.joined(separator: "\n")
+    }
+    
+    private func saveUser() -> Void {
+        
     }
     
     // MARK: - Static init

@@ -25,9 +25,11 @@ struct ContentView: View {
             }
             .padding()
 
-            Text(sampleForm.errorMessage)
+            if let errorMessage = sampleForm.errorMessage {
+                Text(errorMessage)
+            }
             
-            Button("Submit", action: sampleForm.validate)
+            Button("Submit", action: sampleForm.validateAndSaveUser)
         }
     }
 }
