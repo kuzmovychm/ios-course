@@ -42,10 +42,7 @@ class FromViewModel: ObservableObject {
     func validate() {
         for index in 0..<form.fields.count {
             let field = form.fields[index]
-            
-            if let errorMessage = field.getErrorMessage(field.value) {
-                form.fields[index].errorMessage = errorMessage
-            }
+            form.fields[index].errorMessage = field.getErrorMessage(field.value)
             
             if let id = field.equivalentID {
                 if let index = form.fields.firstIndex(where: {$0.id == id}) {
