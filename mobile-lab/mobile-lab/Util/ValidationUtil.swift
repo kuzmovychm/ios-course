@@ -14,7 +14,7 @@ struct ValidationUtil {
     }
 
     static func notEmptySurname(value: String) -> String? {
-        return notEmpty(string: value, name: "Surame")
+        return notEmpty(string: value, name: "Surname")
     }
     
     static func validEmail(value: String) -> String? {
