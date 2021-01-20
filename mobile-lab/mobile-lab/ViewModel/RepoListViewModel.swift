@@ -6,4 +6,14 @@
 //  Copyright © 2021 Max. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
+
+class RepoListViewModel: ObservableObject {
+    private var model = RepoListViewModel.create()
+    
+    // MARK: - static init
+    
+    private static func create() -> ItemList {
+        return ItemList()
+    }
+}

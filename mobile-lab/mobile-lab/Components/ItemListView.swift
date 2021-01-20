@@ -14,9 +14,26 @@ struct ItemListView: View {
     var body: some View {
         ScrollView {
             ForEach(listView.listItems, id: \.self) { item in
-                Text(item.header)
+                ItemView(item: item)
             }
         }
+    }
+}
+
+struct ItemView: View {
+    var item: ListItem
+    
+    var body: some View {
+        HStack {
+            if let imageURL = item.imageURL {
+                Text(imageURL)
+            }
+            VStack {
+                Text(item.header)
+                Text(item.body)
+            }
+        }
+        .padding()
     }
 }
 
