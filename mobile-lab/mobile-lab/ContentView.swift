@@ -10,26 +10,19 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @ObservedObject var sampleForm = FormViewModel()
+    let userListModel = UserListViewModel()
     
     var body: some View {
-        VStack {
-            ForEach(sampleForm.formFields) { field in
-                TextField(field.placeholder, text: Binding<String>(
-                    get: {field.value},
-                    set: {
-                        sampleForm.setValue(id: field.id, value: $0)
-                    }
-                ))
-                .keyboardType(field.keyboardType)
+        NavigationView {
+            VStack {
+                InputFormView()
+                NavigationLink(destination: ItemListView(listView: userListModel)) {
+                    Text("View all users")
+                    .padding()
+                }.simultaneousGesture(TapGesture().onEnded({
+                    userListModel.reloadUsers()
+                }))
             }
-            .padding()
-
-            if let errorMessage = sampleForm.errorMessage {
-                Text(errorMessage)
-            }
-            
-            Button("Submit", action: sampleForm.validateAndSaveUser)
         }
     }
 }

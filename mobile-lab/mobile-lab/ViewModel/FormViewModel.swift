@@ -34,6 +34,7 @@ class FormViewModel: ObservableObject {
         } else {
             errorMessage = nil
             saveUser()
+            clearInput()
         }
     }
     
@@ -52,6 +53,12 @@ class FormViewModel: ObservableObject {
         }
     }
     
+    private func clearInput() -> Void {
+        for index in 0..<form.fields.count {
+            form.fields[index].value = ""
+        }
+    }
+    
     private func getErrorMessage() -> String? {
         var errors: [String] = []
         
@@ -67,15 +74,25 @@ class FormViewModel: ObservableObject {
     private func saveUser() -> Void {
         if let usersData = UserDefaults.standard.data(forKey: "LabAppUsersData") {
             do {
-                var users = try JSONDecoder().decode([User].self, from: usersData)
-                let user = User(name: form.fields[0].value, surname: form.fields[1].value, phone: form.fields[2].value)
-                users.append(user)
-                let updatedUsersData = try JSONEncoder().encode(users)
-                UserDefaults.standard.set(updatedUsersData, forKey: "LabAppUsersData")
-                
+                let users = try JSONDecoder().decode([User].self, from: usersData)
+                addUser(users: users)
             } catch {
-                print("Unable to add users (\(error))")
+                print("Unable to decode users (\(error))")
             }
+        } else {
+            addUser(users: [User]())
+        }
+    }
+    
+    private func addUser(users: [User]) {
+        do {
+            var newUsers = Array(users)
+            let user = User(name: form.fields[0].value, surname: form.fields[1].value, phone: form.fields[2].value)
+            newUsers.append(user)
+            let updatedUsersData = try JSONEncoder().encode(newUsers)
+            UserDefaults.standard.set(updatedUsersData, forKey: "LabAppUsersData")
+        } catch {
+            print("Unable to add users (\(error))")
         }
     }
     

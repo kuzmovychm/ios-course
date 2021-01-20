@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-struct ListView {
+struct ItemList {
     var items = [ListItem]()
 }
 
-struct ListItem {
-    var header: String?
-    var body: String?
+struct ListItem: Hashable {
+    var header: String
+    var body: String
     var imageURL: String?
 }
