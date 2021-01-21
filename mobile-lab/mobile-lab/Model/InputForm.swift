@@ -22,3 +22,12 @@ struct InputField: Identifiable {
     var keyboardType: UIKeyboardType = .default
     var getErrorMessage: (_ value: String) -> String?
 }
+
+enum FieldKeys: Int {
+    case name = 0
+    case surname
+    case email
+    case phone
+    case password
+    case passwordConfirmation
+}

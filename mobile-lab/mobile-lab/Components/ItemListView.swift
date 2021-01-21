@@ -8,12 +8,25 @@
 
 import SwiftUI
 
+struct ItemImageListView: View {
+    @ObservedObject var viewModel: RepoListViewModel
+    
+    var body: some View {
+        viewModel.fetch()
+        return ScrollView {
+            ForEach(viewModel.listItems, id: \.self) { item in
+                ItemView(item: item)
+            }
+        }
+    }
+}
+
 struct ItemListView: View {
-    @ObservedObject var listView = UserListViewModel()
+    @ObservedObject var viewModel: UserListViewModel
     
     var body: some View {
         ScrollView {
-            ForEach(listView.listItems, id: \.self) { item in
+            ForEach(viewModel.listItems, id: \.self) { item in
                 ItemView(item: item)
             }
         }
@@ -24,14 +37,9 @@ struct ItemView: View {
     var item: ListItem
     
     var body: some View {
-        HStack {
-            if let imageURL = item.imageURL {
-                Text(imageURL)
-            }
-            VStack {
-                Text(item.header)
-                Text(item.body)
-            }
+        VStack {
+            Text(item.header)
+            Text(item.body)
         }
         .padding()
     }
@@ -39,6 +47,6 @@ struct ItemView: View {
 
 struct ItemListView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemListView()
+        ItemListView(viewModel: UserListViewModel())
     }
 }

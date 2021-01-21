@@ -87,7 +87,7 @@ class FormViewModel: ObservableObject {
     private func addUser(users: [User]) {
         do {
             var newUsers = Array(users)
-            let user = User(name: form.fields[0].value, surname: form.fields[1].value, phone: form.fields[2].value)
+            let user = User(name: form.fields[FieldKeys.name.rawValue].value, surname: form.fields[FieldKeys.surname.rawValue].value, phone: form.fields[FieldKeys.phone.rawValue].value)
             newUsers.append(user)
             let updatedUsersData = try JSONEncoder().encode(newUsers)
             UserDefaults.standard.set(updatedUsersData, forKey: "LabAppUsersData")
@@ -104,12 +104,12 @@ class FormViewModel: ObservableObject {
     
     private static func generateFormFields() -> [InputField] {
         return [
-            InputField(id: 0, placeholder: "Enter your name...", getErrorMessage: ValidationUtil.notEmptyName),
-            InputField(id: 1, placeholder: "Enter your surname...", getErrorMessage: ValidationUtil.notEmptySurname),
-            InputField(id: 2, placeholder: "Enter your email...", getErrorMessage: ValidationUtil.validEmail),
-            InputField(id: 3, placeholder: "Enter your phone...", keyboardType: .numberPad, getErrorMessage: ValidationUtil.validPhone),
-            InputField(id: 4, placeholder: "Enter your password...", getErrorMessage: ValidationUtil.validPassword),
-            InputField(id: 5, equivalentID: 4, name: "password", placeholder: "Repeat your password...", getErrorMessage: ValidationUtil.noMessage)
+            InputField(id: FieldKeys.name.rawValue, placeholder: "Enter your name...", getErrorMessage: ValidationUtil.notEmptyName),
+            InputField(id: FieldKeys.surname.rawValue, placeholder: "Enter your surname...", getErrorMessage: ValidationUtil.notEmptySurname),
+            InputField(id: FieldKeys.email.rawValue, placeholder: "Enter your email...", getErrorMessage: ValidationUtil.validEmail),
+            InputField(id: FieldKeys.phone.rawValue, placeholder: "Enter your phone...", keyboardType: .numberPad, getErrorMessage: ValidationUtil.validPhone),
+            InputField(id: FieldKeys.password.rawValue, placeholder: "Enter your password...", getErrorMessage: ValidationUtil.validPassword),
+            InputField(id: FieldKeys.passwordConfirmation.rawValue, equivalentID: FieldKeys.password.rawValue, name: "password", placeholder: "Repeat your password...", getErrorMessage: ValidationUtil.noMessage)
         ]
     }
     

@@ -10,18 +10,23 @@ import SwiftUI
 
 
 struct ContentView: View {
-    let userListModel = UserListViewModel()
+    let userListViewModel = UserListViewModel()
+    let repoViewModel = RepoListViewModel()
     
     var body: some View {
         NavigationView {
             VStack {
                 InputFormView()
-                NavigationLink(destination: ItemListView(listView: userListModel)) {
+                NavigationLink(destination: ItemListView(viewModel: userListViewModel)) {
                     Text("View all users")
                     .padding()
                 }.simultaneousGesture(TapGesture().onEnded({
-                    userListModel.reloadUsers()
+                    userListViewModel.reloadUsers()
                 }))
+                NavigationLink(destination: ItemImageListView(viewModel: repoViewModel)) {
+                    Text("See repos")
+                        .padding()
+                }
             }
         }
     }
@@ -32,4 +37,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
