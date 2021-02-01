@@ -41,14 +41,14 @@ struct ItemView: View {
     
     var body: some View {
         HStack {
-            
             URLImage(url: URL(string: item.imageURL!)!,
                      content: { image in
                          image
                              .resizable()
                              .aspectRatio(contentMode: .fit)
-                     })
+         })
                 .frame(width: 100, height: 100)
+            
             
             VStack {
                 Text(item.header)
@@ -56,8 +56,11 @@ struct ItemView: View {
             }
                 .padding()
             
+            Spacer()
+            
         }
             .padding()
+        
     }
 }
 
