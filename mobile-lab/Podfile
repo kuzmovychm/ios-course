@@ -8,6 +8,7 @@ target 'mobile-lab' do
   # Pods for mobile-lab
 
   pod "Alamofire"
+  pod "URLImage"
 
   target 'mobile-labTests' do
     inherit! :search_paths

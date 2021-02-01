@@ -7,16 +7,19 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct ItemImageListView: View {
     @ObservedObject var viewModel: RepoListViewModel
     
     var body: some View {
-        viewModel.fetch()
         return ScrollView {
             ForEach(viewModel.listItems, id: \.self) { item in
                 ItemView(item: item)
             }
+        }
+        .onAppear() {
+            viewModel.fetch()
         }
     }
 }
@@ -27,7 +30,7 @@ struct ItemListView: View {
     var body: some View {
         ScrollView {
             ForEach(viewModel.listItems, id: \.self) { item in
-                ItemView(item: item)
+                return ItemView(item: item)
             }
         }
     }
@@ -37,11 +40,24 @@ struct ItemView: View {
     var item: ListItem
     
     var body: some View {
-        VStack {
-            Text(item.header)
-            Text(item.body)
+        HStack {
+            
+            URLImage(url: URL(string: item.imageURL!)!,
+                     content: { image in
+                         image
+                             .resizable()
+                             .aspectRatio(contentMode: .fit)
+                     })
+                .frame(width: 100, height: 100)
+            
+            VStack {
+                Text(item.header)
+                Text(item.body)
+            }
+                .padding()
+            
         }
-        .padding()
+            .padding()
     }
 }
 

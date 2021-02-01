@@ -10,7 +10,7 @@ import SwiftUI
 import Alamofire
 
 class RepoListViewModel: ObservableObject {
-    private var model = ItemList()
+    @Published private var model = ItemList()
     
     //MARK: - model access
     
