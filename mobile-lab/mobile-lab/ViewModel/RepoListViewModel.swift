@@ -25,17 +25,16 @@ class RepoListViewModel: ObservableObject {
     // MARK: - static init
     
     func fetch() -> Void {
-        AF.request("https://api.github.com/orgs/square/repos").responseJSON { response in
+        AF.request("https://rickandmortyapi.com/api/character", method: .get, encoding: JSONEncoding.default).responseJSON { response in
             do {
-                let json = response.data
-                let repos = try JSONDecoder().decode([Repo].self, from: json!)
+                let characterWrapper = try JSONDecoder().decode(CharacterWrapper.self, from: response.data!)
                 var repoItems = [ListItem]()
-                for repo in repos {
-                    repoItems.append(ListItem(header: repo.name, body: repo.owner.login, imageURL: repo.owner.avatar_url))
+                for character in characterWrapper.results {
+                    repoItems.append(ListItem(header: character.name, body: "\(character.species) / \(character.status)", imageURL: character.image))
                 }
                 self.setItems(items: repoItems)
             } catch {
-                print("Unable to decode users (\(error))")
+                print("Unable to decode characters (\(error))")
             }
         }
     }
