@@ -13,13 +13,26 @@ struct ItemImageListView: View {
     @ObservedObject var viewModel: RepoListViewModel
     
     var body: some View {
-        return ScrollView {
-            ForEach(viewModel.listItems, id: \.self) { item in
-                ItemView(item: item)
+        RefreshableScrollView(onRefresh: { done in
+            print("Refresh!")
+            viewModel.fetch() {
+                done()
+            }
+        }) {
+            if (viewModel.listItems.isEmpty) {
+                Text("Loading data ...")
+            } else {
+                VStack {
+                    ForEach(viewModel.listItems, id: \.self) { item in
+                        ItemView(item: item)
+                    }
+                }
             }
         }
         .onAppear() {
-            viewModel.fetch()
+            viewModel.fetch() {
+                print("Text")
+            }
         }
     }
 }

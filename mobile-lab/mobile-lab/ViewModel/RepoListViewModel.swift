@@ -24,7 +24,8 @@ class RepoListViewModel: ObservableObject {
     
     // MARK: - static init
     
-    func fetch() -> Void {
+    func fetch(onComplete: @escaping () -> Void) -> Void {
+        self.setItems(items: [ListItem]())
         AF.request("https://rickandmortyapi.com/api/character", method: .get, encoding: JSONEncoding.default).responseJSON { response in
             do {
                 let characterWrapper = try JSONDecoder().decode(CharacterWrapper.self, from: response.data!)
@@ -33,6 +34,7 @@ class RepoListViewModel: ObservableObject {
                     repoItems.append(ListItem(header: character.name, body: "\(character.species) / \(character.status)", imageURL: character.image))
                 }
                 self.setItems(items: repoItems)
+                onComplete()
             } catch {
                 print("Unable to decode characters (\(error))")
             }
