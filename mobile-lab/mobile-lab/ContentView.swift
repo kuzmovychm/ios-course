@@ -8,41 +8,24 @@
 
 import SwiftUI
 
-struct CustomButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-            configuration.label
-                .foregroundColor(Color.white)
-                .padding(8)
-                .background(LinearGradient(gradient: Gradient(colors: configuration.isPressed ? [Color.pink, Color.red] : [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
-                .cornerRadius(15.0)
-                .scaleEffect(configuration.isPressed ? 1.02 : 1.0)
-        }
-}
 
 struct ContentView: View {
-    @State var name: String = ""
-    @State var userInput: String = ""
+    let userListViewModel = UserListViewModel()
+    let repoViewModel = CharacterListViewModel()
     
     var body: some View {
-        VStack {
-            VStack(content: {
-                TextField("Input your name", text: $name)
-                    .multilineTextAlignment(.center)
-                    .modifier(ClearButton(text: $name))
-                Button(action: {
-                    if !name.isEmpty {
-                        self.userInput = name;
-                    }
-                }, label: {
-                    Text("Say hello")
-                }).buttonStyle(CustomButtonStyle())
-            })
-            if !userInput.isEmpty {
-                if #available(iOS 14.0, *) {
-                    Label(title: { Text(("Hello " + userInput).trimmingCharacters(in: .whitespacesAndNewlines)) },
-                          icon: { Text("") })
-                } else {
-                    Text("Hello " + userInput)
+        NavigationView {
+            VStack {
+                InputFormView()
+                NavigationLink(destination: ItemListView(viewModel: userListViewModel)) {
+                    Text("View all users")
+                    .padding()
+                }.simultaneousGesture(TapGesture().onEnded({
+                    userListViewModel.reloadUsers()
+                }))
+                NavigationLink(destination: ItemImageListView(viewModel: repoViewModel)) {
+                    Text("See characters")
+                        .padding()
                 }
             }
         }
@@ -51,6 +34,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(name: "")
+        ContentView()
     }
 }
