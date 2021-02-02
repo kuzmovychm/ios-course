@@ -10,30 +10,47 @@ import SwiftUI
 import URLImage
 
 struct ItemImageListView: View {
-    @ObservedObject var viewModel: RepoListViewModel
+    @ObservedObject var viewModel: CharacterListViewModel
     
     var body: some View {
-        RefreshableScrollView(onRefresh: { done in
-            print("Refresh!")
-            viewModel.fetch() {
-                done()
-            }
-        }) {
-            if (viewModel.listItems.isEmpty) {
-                Text("Loading data ...")
-            } else {
-                VStack {
-                    ForEach(viewModel.listItems, id: \.self) { item in
-                        ItemView(item: item)
+            RefreshableScrollView(onRefresh: { done in
+                print("Refresh!")
+                viewModel.fetch() {
+                    done()
+                }
+            }) {
+                if (viewModel.listItems.isEmpty && !viewModel.showFavourites) {
+                    Text("Loading data ...")
+                } else {
+                        VStack {
+                            ForEach(viewModel.listItems, id: \.self) { character in
+                                HStack {
+                                    NavigationLink(destination: CharacterDetails(character: character)) {
+                                        ItemView(character: character)
+                                    }
+                                    Image(systemName: "heart.fill")
+                                        .padding()
+                                        .foregroundColor(viewModel.isFavourite(character) ? .red : .blue)
+                                        .onTapGesture {
+                                            if (viewModel.isFavourite(character)) {
+                                                viewModel.removeFavourite(character)
+                                            } else {
+                                                viewModel.addFavourite(character)
+                                            }
+                                        }
+                                }
+                          }
+                            .navigationBarItems(trailing: Text(viewModel.showFavourites ? "Show all" : "Favourites").onTapGesture {
+                                viewModel.filterFavourites()
+                            })
                     }
                 }
             }
-        }
-        .onAppear() {
-            viewModel.fetch() {
-                print("Text")
+            .onAppear() {
+                viewModel.fetch() {
+                    print("Text")
+                }
             }
-        }
     }
 }
 
@@ -43,18 +60,18 @@ struct ItemListView: View {
     var body: some View {
         ScrollView {
             ForEach(viewModel.listItems, id: \.self) { item in
-                return ItemView(item: item)
+                Text("Mock")
             }
         }
     }
 }
 
 struct ItemView: View {
-    var item: ListItem
+    var character: Character
     
     var body: some View {
         HStack {
-            URLImage(url: URL(string: item.imageURL!)!,
+            URLImage(url: URL(string: character.image)!,
                      content: { image in
                          image
                              .resizable()
@@ -63,11 +80,12 @@ struct ItemView: View {
                 .frame(width: 100, height: 100)
             
             
-            VStack {
-                Text(item.header)
-                Text(item.body)
+            VStack(alignment: .leading) {
+                Text(character.name)
+                Text(character.origin.name)
             }
                 .padding()
+                .foregroundColor(.black)
             
             Spacer()
             

@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ContentView: View {
     let userListViewModel = UserListViewModel()
-    let repoViewModel = RepoListViewModel()
+    let repoViewModel = CharacterListViewModel()
     
     var body: some View {
         NavigationView {
@@ -24,7 +24,7 @@ struct ContentView: View {
                     userListViewModel.reloadUsers()
                 }))
                 NavigationLink(destination: ItemImageListView(viewModel: repoViewModel)) {
-                    Text("See repos")
+                    Text("See characters")
                         .padding()
                 }
             }

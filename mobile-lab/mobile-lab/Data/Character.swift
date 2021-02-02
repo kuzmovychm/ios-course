@@ -20,7 +20,11 @@ struct CharacterInfo: Codable {
     var prev: String?
 }
 
-struct Character: Codable {
+struct Character: Codable, Hashable {
+    static func == (lhs: Character, rhs: Character) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     var id: Int
     var name: String
     var status: String
@@ -31,7 +35,7 @@ struct Character: Codable {
     var image: String
 }
 
-struct ObjectInfo: Codable {
+struct ObjectInfo: Codable, Hashable {
     var name: String
     var url: String
 }
